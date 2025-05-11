@@ -33,7 +33,7 @@ export default function CategoryList({ onEdit }) {
           {categories.map(cat => (
             <tr key={cat.id}>
               <td>{cat.name}</td>
-              <td>{cat.type === 'I' ? 'Income' : 'Expense'}</td>
+              <td>{cat.type === 'income' ? 'Income' : 'Expense'}</td>
               <td className="text-right">
                 <button className="btn sm" onClick={() => onEdit(cat)}>Edit</button>{' '}
                 <button className="btn sm" onClick={() => handleDelete(cat.id)}>Delete</button>

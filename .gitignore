@@ -73,3 +73,5 @@ dist/
 build/
 .cache/
 .vite/
+
+.env

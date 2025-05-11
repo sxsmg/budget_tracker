@@ -4,7 +4,7 @@ import api from '../api/axios';
 
 export default function CategoryForm({ editing, onSaved, onCancel }) {
   const [name, setName] = useState(editing?.name || '');
-  const [type, setType] = useState(editing?.type || 'E');
+  const [type, setType] = useState(editing?.type || 'expense');
 
   useEffect(() => {
     if (editing) {
@@ -34,8 +34,8 @@ export default function CategoryForm({ editing, onSaved, onCancel }) {
         <div className="form-group">
           <label>Type</label>
           <select value={type} onChange={e => setType(e.target.value)}>
-            <option value="I">Income</option>
-            <option value="E">Expense</option>
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
           </select>
         </div>
         <div className="form-inline">
