@@ -1,12 +1,14 @@
 // src/pages/Login.jsx
 import { useState, useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const { login } = useContext(AuthContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -41,6 +43,9 @@ export default function Login() {
         </div>
         <button className="btn" type="submit" style={{ marginTop: '1rem' }}>
           Log In
+        </button>
+        <button className="btn" type="submit" onClick={() => navigate('/register')} style={{ marginTop: '1rem' }}>
+          Register
         </button>
       </form>
     </div>

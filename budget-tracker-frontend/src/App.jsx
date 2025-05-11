@@ -3,6 +3,7 @@ import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import Login        from './pages/Login';
+import Register from './pages/Register';
 import Dashboard    from './pages/Dashboard';
 import Transactions from './pages/Transactions';
 import Budget       from './pages/Budget';
@@ -16,6 +17,7 @@ export default function App() {
     <Routes>
       {/* public */}
       <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
 
       {/* protected: wraps all the private routes in your Layout */}
       <Route
