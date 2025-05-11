@@ -1,67 +1,93 @@
-// src/pages/Budget.jsx
-import React, { useState, useEffect } from 'react';
-import { getBudgets, createBudget, updateBudget } from '../api/budget';
-import BudgetForm from '../components/BudgetForm';
-import BudgetChart from '../components/BudgetChart';
-import api from '../api/axios';
+import React, { useState, useEffect } from 'react'  // ← you need both React and the hooks
+import { getBudgets, createBudget, updateBudget } from '../api/budget'
+import BudgetForm from '../components/BudgetForm'
+import BudgetChart from '../components/BudgetChart'
+import api from '../api/axios'
+
 
 export default function Budget() {
-  const [budget, setBudget] = useState(null);
-  const [comparison, setComparison] = useState(null);
-  const [editing, setEditing] = useState(false);
+  const [budget, setBudget]         = useState(undefined); // undefined = not loaded; null = loaded, but none
+  const [comparison, setComparison] = useState(undefined);
+  const [editing, setEditing]       = useState(false);
 
-  // Helper to load the current month/year budget
+  // use month/year selectors, too
+  const now = new Date();
+  const [month, setMonth] = useState(now.getMonth()+1);
+  const [year,  setYear ] = useState(now.getFullYear());
+
   const loadBudget = async () => {
-    const now = new Date();
-    const month = now.getMonth() + 1;
-    const year = now.getFullYear();
+    // fetch one budget for that month/year
     const res = await getBudgets({ month, year });
-    // assume one budget per month
-    setBudget(res.data.results?.[0] ?? null);
+    setBudget(res.data.results[0] ?? null);
   };
 
   useEffect(() => {
-    // 1) Load or create the current budget
     loadBudget();
-
-    // 2) Fetch the actual vs. budget numbers
     api.get('/api/budget-comparison/')
-        .then(res => setComparison(res.data))
-        .catch(console.error);
-    }, []);
+       .then(res => setComparison(res.data))
+       .catch(console.error);
+  }, [month, year]);
 
-  const handleSave = ({ amount }) => {
-    const action = budget
-      ? updateBudget(budget.id, { month: budget.month, year: budget.year, amount })
-      : createBudget({ amount }); // backend should infer month/year from user
-    action
-      .then(() => {
-        setEditing(false);
-        loadBudget();
-      })
-      .catch(console.error);
-  };
-
-  if (budget === null || comparison === null) {
+  // still waiting? show a spinner
+  if (budget === undefined || comparison === undefined) {
     return <p>Loading budget…</p>;
   }
 
+  // once loaded, if there is _no_ budget we fall through to the form
   return (
     <div style={{ maxWidth: 800, margin: '2rem auto' }}>
       <h1>Budget Management</h1>
 
-      {editing ? (
+      {/* month/year picker */}
+      <div style={{ marginBottom: '1rem' }}>
+        <label>
+          Month:{' '}
+          <select value={month} onChange={e=>setMonth(+e.target.value)}>
+            {Array.from({length:12},(_,i)=>(
+              <option key={i} value={i+1}>
+                {i+1}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label style={{ marginLeft: 16 }}>
+          Year:{' '}
+          <select value={year} onChange={e=>setYear(+e.target.value)}>
+            {Array.from({length:5},(_,i)=>year-2+i).map(y=>(
+              <option key={y} value={y}>{y}</option>
+            ))}
+          </select>
+        </label>
+      </div>
+
+      {editing || budget === null ? (
         <BudgetForm
-          initialAmount={budget.amount}
-          onSave={handleSave}
+          initialAmount={budget?.amount ?? ''}
+          onSave={({ amount }) => {
+            const payload = { month, year, amount };
+            const action = budget
+              ? updateBudget(budget.id, payload)
+              : createBudget(payload);
+            action
+              .then(() => {
+                setEditing(false);
+                loadBudget();
+              })
+              .catch(console.error);
+          }}
           onCancel={() => setEditing(false)}
         />
       ) : (
         <div style={{ marginBottom: '1rem' }}>
           <p>
-            <strong>Current Month Budget:</strong> ₹{budget.amount}
+            <strong>
+              {month}/{year} Budget:
+            </strong>{' '}
+            ₹{budget.amount}
           </p>
-          <button className="btn" onClick={() => setEditing(true)}>Edit Budget</button>
+          <button className="btn" onClick={() => setEditing(true)}>
+            {budget ? 'Edit' : 'Set'} Budget
+          </button>
         </div>
       )}
 
