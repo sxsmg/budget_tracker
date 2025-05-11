@@ -31,12 +31,12 @@ export default function TransactionForm({ initial={}, onSave, onCancel }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ maxWidth: 400 }}>
-      <div>
+    <form className="form" onSubmit={handleSubmit} style={{ maxWidth: 400 }}>
+      <div className="form-field">
         <label>Date</label><br/>
         <input type="date" name="date" value={form.date} onChange={handleChange} required />
       </div>
-      <div>
+      <div className="form-field">
         <label>Category</label><br/>
         <select name="category" value={form.category} onChange={handleChange} required>
           <option value="">— select —</option>
@@ -47,19 +47,19 @@ export default function TransactionForm({ initial={}, onSave, onCancel }) {
           ))}
         </select>
       </div>
-      <div>
+      <div className="form-field">
         <label>Amount</label><br/>
         <input
           type="number" name="amount" step="0.01"
           value={form.amount} onChange={handleChange} required
         />
       </div>
-      <div>
+      <div className="form-field">
         <label>Description</label><br/>
         <input name="description" value={form.description} onChange={handleChange} />
       </div>
-      <button type="submit" style={{ marginTop: '1rem' }}>Save</button>
-      <button type="button" onClick={onCancel} style={{ marginLeft: 8 }}>Cancel</button>
+      <button type="submit" className="button button-primary" style={{ marginTop: '1rem' }}>Save</button>
+      <button type="button" className="button button-primary" onClick={onCancel} style={{ marginLeft: 8 }}>Cancel</button>
     </form>
   );
 }
