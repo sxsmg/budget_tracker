@@ -1,6 +1,6 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import Category, Transaction, MonthlyBudget
-from .serializers import CategorySerializer, TransactionSerializer, MonthlyBudgetSerializer
+from .serializers import CategorySerializer, TransactionSerializer, MonthlyBudgetSerializer, RegisterSerializer
 from rest_framework.pagination import PageNumberPagination
 from rest_framework import viewsets, filters
 from rest_framework.permissions import IsAuthenticated
@@ -9,6 +9,8 @@ from rest_framework.response import Response
 from django.db.models import Sum, Q
 from datetime import date
 from dateutil.relativedelta import relativedelta  # 
+from rest_framework.authtoken.models import Token
+from rest_framework import status
 
 class BaseOwnedModelViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
@@ -138,3 +140,18 @@ class SummaryTrendView(APIView):
             })
 
         return Response(trend)
+    
+
+class RegisterView(APIView):
+    # public endpoint
+    permission_classes = []
+    authentication_classes = []
+
+    def post(self, request):
+        serializer = RegisterSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        user = serializer.save()
+        token = Token.objects.create(user=user)
+        return Response({'token': token.key}, status=status.HTTP_201_CREATED)

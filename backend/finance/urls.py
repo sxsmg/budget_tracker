@@ -10,6 +10,7 @@ from .views import (
     FinancialSummaryView,
     BudgetComparisonView,
     SummaryTrendView,
+    RegisterView,
 )
 
 router = DefaultRouter()
@@ -20,6 +21,7 @@ router.register(r'budgets', MonthlyBudgetViewSet, basename='budget')
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('register/', RegisterView.as_view(), name='register'),
     path('summary/', FinancialSummaryView.as_view(), name='financial-summary'),
     path('summary-trend/', SummaryTrendView.as_view(), name='summary-trend'),
     path('budget-comparison/', BudgetComparisonView.as_view(), name='budget-comparison'),
