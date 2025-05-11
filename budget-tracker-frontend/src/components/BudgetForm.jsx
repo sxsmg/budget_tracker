@@ -21,9 +21,10 @@ export default function BudgetForm({ initialAmount = '', onSave, onCancel }) {
           required
         />
       </div>
-      <button type="submit" style={{ marginTop: '0.5rem' }}>Save</button>
+      <button className="btn btn-add" type="submit" style={{ marginTop: '0.5rem' }}>Save</button>
       <button
         type="button"
+        className="btn btn-add"
         onClick={onCancel}
         style={{ marginLeft: 8, marginTop: '0.5rem' }}
       >

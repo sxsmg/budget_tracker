@@ -61,7 +61,7 @@ export default function Budget() {
           <p>
             <strong>Current Month Budget:</strong> ₹{budget.amount}
           </p>
-          <button onClick={() => setEditing(true)}>Edit Budget</button>
+          <button className="btn" onClick={() => setEditing(true)}>Edit Budget</button>
         </div>
       )}
 

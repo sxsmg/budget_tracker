@@ -18,11 +18,11 @@ export default function Login() {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: '2rem auto' }}>
+    <div className="form" style={{ maxWidth: 400, margin: '2rem auto' }}>
       <h2>Login</h2>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="form-field">
           <label>Username</label><br/>
           <input
             value={username}
@@ -30,7 +30,7 @@ export default function Login() {
             required
           />
         </div>
-        <div style={{ marginTop: '1rem' }}>
+        <div className="form-field" style={{ marginTop: '1rem' }}>
           <label>Password</label><br/>
           <input
             type="password"
@@ -39,7 +39,7 @@ export default function Login() {
             required
           />
         </div>
-        <button type="submit" style={{ marginTop: '1rem' }}>
+        <button className="btn" type="submit" style={{ marginTop: '1rem' }}>
           Log In
         </button>
       </form>

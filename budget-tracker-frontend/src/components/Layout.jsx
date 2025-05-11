@@ -17,7 +17,7 @@ export default function Layout() {
         <NavLink to="/dashboard" style={linkStyle}>Dashboard</NavLink>
         <NavLink to="/transactions" style={linkStyle}>Transactions</NavLink>
         <NavLink to="/budget" style={linkStyle}>Budget</NavLink>
-        <button onClick={logout} style={{ float: 'right' }}>Logout</button>
+        <button className="btn btn-add" onClick={logout} style={{ float: 'right' }}>Logout</button>
       </nav>
       <Outlet />
     </div>

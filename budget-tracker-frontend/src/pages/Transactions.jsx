@@ -6,8 +6,10 @@ import {
   createTransaction,
   updateTransaction
 } from '../api/transactions';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 export default function Transactions() {
+  const navigate = useNavigate();
   const [editing, setEditing] = useState(null);
   const [showForm, setShowForm] = useState(false);
   // use `showForm` as a key to force list to re-fetch when toggled
@@ -32,7 +34,7 @@ export default function Transactions() {
   };
 
   return (
-    <div style={{ maxWidth: 800, margin: '2rem auto' }}>
+    <div className="transaction-containder" style={{ maxWidth: 800, margin: '2rem auto' }}>
       <h1>Transactions</h1>
 
       {showForm ? (
@@ -46,8 +48,9 @@ export default function Transactions() {
         />
       ) : (
         <>
-          <button onClick={() => setShowForm(true)}>+ Add Transaction</button>
-          <TransactionList key={listKey} onEdit={handleEdit} />
+          <button className="btn btn-add" onClick={() => setShowForm(true)}>+ Add Transaction</button>
+          <button className="btn btn-add" onClick={() => navigate("/categories")}>+ Add Categories</button>
+          <TransactionList className="transaction-table" key={listKey} onEdit={handleEdit} />
         </>
       )}
     </div>

@@ -168,3 +168,200 @@ main {
 .text-center { text-align: center; }
 .mt-1 { margin-top: var(--spacer); }
 .mb-1 { margin-bottom: var(--spacer); }
+
+/* ----------------------------------------------------------------------
+   Dashboard summary grid
+---------------------------------------------------------------------- */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--spacer);
+  margin-bottom: var(--spacer);
+}
+
+.summary-item {
+  text-align: center;
+}
+
+.summary-item h3 {
+  margin-bottom: var(--spacer-sm);
+  font-size: var(--fz-lg);
+  color: var(--color-grey);
+}
+
+.summary-value {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+/* ----------------------------------------------------------------------
+   Chart containers
+---------------------------------------------------------------------- */
+.chart-container {
+  margin-bottom: var(--spacer);
+}
+
+/* ----------------------------------------------------------------------
+   Category badges
+---------------------------------------------------------------------- */
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius);
+  font-size: var(--fz-sm);
+  font-weight: 500;
+  margin-right: var(--spacer-sm);
+}
+
+.badge.income {
+  background: #d1e7dd;
+  color: #0f5132;
+}
+
+.badge.expense {
+  background: #f8d7da;
+  color: #842029;
+}
+
+/* ----------------------------------------------------------------------
+   Budget difference text
+---------------------------------------------------------------------- */
+.budget-diff {
+  font-size: var(--fz-lg);
+  font-weight: 600;
+  margin-top: var(--spacer);
+}
+
+.budget-diff.positive {
+  color: #0f5132;
+}
+
+.budget-diff.negative {
+  color: var(--color-danger);
+}
+
+/* ----------------------------------------------------------------------
+   Responsive tweaks
+---------------------------------------------------------------------- */
+@media (max-width: 600px) {
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+  .form {
+    flex-direction: column;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   Transactions page
+---------------------------------------------------------------------------- */
+
+/* container & header */
+.transactions-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.transactions-container h1 {
+  margin-bottom: var(--spacer);
+  font-size: var(--fz-xl);
+  color: var(--color-dark);
+}
+
+/* Add-button */
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  font-size: var(--fz-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-add {
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  margin-bottom: var(--spacer);
+}
+
+.btn-add:hover {
+  background: var(--color-primary-dark);
+}
+
+/* Transaction table */
+.transaction-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: var(--spacer-sm);
+}
+
+.transaction-table th,
+.transaction-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--color-light);
+  text-align: left;
+}
+
+.transaction-table th {
+  background: var(--color-lightest);
+  font-weight: 600;
+}
+
+.transaction-table tbody tr:hover {
+  background: var(--color-light);
+}
+
+/* Form wrapper (TransactionForm) */
+.transaction-form {
+  background: white;
+  padding: var(--spacer);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.transaction-form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--spacer);
+}
+
+.transaction-form label {
+  margin-bottom: 0.25rem;
+  font-size: var(--fz-sm);
+  color: var(--color-grey-dark);
+}
+
+.transaction-form input,
+.transaction-form select {
+  padding: 0.5rem;
+  font-size: var(--fz-sm);
+  border: 1px solid var(--color-light);
+  border-radius: var(--radius);
+}
+
+.transaction-form .form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacer-sm);
+  margin-top: var(--spacer);
+}
+
+.transaction-form .form-actions .btn {
+  font-size: var(--fz-sm);
+}
+
+.transaction-form .form-actions .btn-cancel {
+  background: transparent;
+  color: var(--color-grey-dark);
+  border: 1px solid var(--color-light);
+}
+
+.transaction-form .form-actions .btn-save {
+  background: var(--color-primary);
+  color: white;
+  border: none;
+}
