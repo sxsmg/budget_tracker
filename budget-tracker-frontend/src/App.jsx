@@ -6,6 +6,7 @@ import Login        from './pages/Login';
 import Dashboard    from './pages/Dashboard';
 import Transactions from './pages/Transactions';
 import Budget       from './pages/Budget';
+import Categories from './pages/Categories';
 
 import Layout       from './components/Layout';
 import PrivateRoute from './components/PrivateRoute';
@@ -25,6 +26,7 @@ export default function App() {
         }
       >
         <Route path="/dashboard"    element={<Dashboard />} />
+        <Route path="/categories" element={<Categories />} />
         <Route path="/transactions" element={<Transactions />} />
         <Route path="/budget"       element={<Budget />} />
       </Route>

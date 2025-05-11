@@ -1,0 +1,170 @@
+/* 1) RESET & BOX-SIZING */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 2) CSS VARIABLES FOR EASY TWEAKS */
+:root {
+  /* colors */
+  --color-bg:     #f4f6f8;
+  --color-white:  #ffffff;
+  --color-light:  #e0e0e0;
+  --color-grey:   #777777;
+  --color-dark:   #333333;
+  --color-primary:#007bff;
+  --color-danger: #dc3545;
+
+  /* typography */
+  --font-base:   'Segoe UI', Roboto, sans-serif;
+  --fz-base:     16px;
+  --fz-lg:       1.25rem;
+  --fz-sm:       0.875rem;
+
+  /* spacing */
+  --spacer:      1rem;
+  --spacer-sm:   0.5rem;
+  --radius:      6px;
+  --shadow:      0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* 3) GLOBAL ELEMENT STYLES */
+body {
+  font-family: var(--font-base);
+  font-size: var(--fz-base);
+  background: var(--color-bg);
+  color: var(--color-dark);
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4 {
+  margin-bottom: var(--spacer-sm);
+  color: var(--color-dark);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+/* 4) LAYOUT CONTAINERS */
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  background: var(--color-white);
+  padding: var(--spacer);
+  box-shadow: var(--shadow);
+}
+
+main {
+  flex: 1;
+  padding: var(--spacer);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 5) NAVIGATION */
+.nav {
+  display: flex;
+  gap: var(--spacer);
+}
+.nav a {
+  padding: var(--spacer-sm) var(--spacer);
+  border-radius: var(--radius);
+}
+.nav a.active {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* 6) CARD (SUMMARY BOXES, CHART CONTAINERS) */
+.card {
+  background: var(--color-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--spacer);
+  margin-bottom: var(--spacer);
+}
+
+/* 7) TABLES */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--spacer);
+}
+.table th,
+.table td {
+  border: 1px solid var(--color-light);
+  padding: var(--spacer-sm);
+  text-align: left;
+}
+.table th {
+  background: var(--color-light);
+  font-weight: 600;
+}
+
+/* 8) FORMS */
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacer);
+  margin-bottom: var(--spacer);
+}
+.form-field {
+  flex: 1 1 200px;
+  display: flex;
+  flex-direction: column;
+}
+.form-field label {
+  margin-bottom: var(--spacer-sm);
+  font-weight: 500;
+}
+.form-field input,
+.form-field select,
+.form-field textarea {
+  padding: var(--spacer-sm);
+  border: 1px solid var(--color-light);
+  border-radius: var(--radius);
+  font-size: var(--fz-base);
+}
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+/* 9) BUTTONS */
+.button {
+  display: inline-block;
+  padding: var(--spacer-sm) var(--spacer);
+  border: none;
+  border-radius: var(--radius);
+  font-size: var(--fz-base);
+  cursor: pointer;
+  text-align: center;
+}
+.button-primary {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+.button-danger {
+  background: var(--color-danger);
+  color: var(--color-white);
+}
+.button + .button {
+  margin-left: var(--spacer-sm);
+}
+
+/* 10) UTILITY CLASSES */
+.text-center { text-align: center; }
+.mt-1 { margin-top: var(--spacer); }
+.mb-1 { margin-bottom: var(--spacer); }

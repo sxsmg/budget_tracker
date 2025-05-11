@@ -55,5 +55,9 @@ export default function SummaryChart({ data }) {
     svg.append('text').attr('x', width - margin.right - 80).attr('y', margin.top + 25).text('Expense');
   }, [data]);
 
-  return <svg ref={ref} width={800} height={300} />;
+  return (
+    <div className="card"> 
+        <svg ref={ref} width={800} height={300} />;
+    </div> 
+    )
 }
